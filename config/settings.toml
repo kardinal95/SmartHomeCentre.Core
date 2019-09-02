@@ -1,0 +1,8 @@
+[default]
+empty=0
+
+[development]
+empty=1
+sql_engine='psql'
+sql_host='127.0.0.1'
+sql_dbname='shc_development_db'
