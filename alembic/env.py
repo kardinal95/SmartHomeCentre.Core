@@ -1,6 +1,5 @@
 import os
 import sys
-
 from logging.config import fileConfig
 
 from alembic import context
@@ -30,8 +29,13 @@ fileConfig(config.config_file_name)
 # Some workarounds. Replace later?
 sys.path.insert(0, os.path.realpath(os.path.join(os.path.dirname(__file__), '..')))
 
-from py.models.base import ModelBase
+# Here be imports for alembic model system
+from py.models import ModelBase
+from py.drivers.mqtt.endpoint import MqttEndpoint, MqttParameterPattern
 from py.models.driver_instance import DriverInstance
+from py.models.trigger import Trigger
+from py.models.scenario import ScenarioInstruction, Scenario
+from py.models.instruction import InstructionType
 
 target_metadata = ModelBase.get_base().metadata
 

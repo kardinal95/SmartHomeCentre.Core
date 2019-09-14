@@ -1,6 +1,6 @@
+import sqlalchemy as db
 from dynaconf import settings, Validator
 from loguru import logger
-import sqlalchemy as db
 from sqlalchemy.exc import OperationalError
 from sqlalchemy.orm import sessionmaker
 

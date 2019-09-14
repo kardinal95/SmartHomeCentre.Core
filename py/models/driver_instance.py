@@ -2,8 +2,7 @@ from sqlalchemy import Column, Enum, String
 from sqlalchemy.dialects.postgresql import UUID
 
 from py.drivers.mqtt.driver import MqttDriver
-from py.models.base import ModelBase
-
+from py.models import ModelBase
 
 mapping = {
     'mqtt': MqttDriver,

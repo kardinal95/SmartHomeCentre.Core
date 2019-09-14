@@ -5,13 +5,13 @@ Revises: 4759f36b18d4
 Create Date: 2019-09-02 16:44:07.111119
 
 """
-from alembic import op
 import sqlalchemy as sa
+from alembic import op
 from sqlalchemy.dialects import postgresql
 
 # revision identifiers, used by Alembic.
 revision = '863938515119'
-down_revision = '4759f36b18d4'
+down_revision = None
 branch_labels = None
 depends_on = None
 

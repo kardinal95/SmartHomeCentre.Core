@@ -1,7 +1,7 @@
 import sys
 
-from loguru import logger
 from dynaconf import settings, Validator, ValidationError
+from loguru import logger
 
 from py.drivers.master import DriverMaster
 from py.main.db import init_db, DatabaseObjects
@@ -42,3 +42,6 @@ if __name__ == '__main__':
         logger.critical('Cannot work without connection to database! Closing...')
 
     master = DriverMaster()
+
+    while True:
+        pass
