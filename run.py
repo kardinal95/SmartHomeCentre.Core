@@ -7,6 +7,7 @@ from loguru import logger
 from py.core import MainHub
 from py.core.binder import BinderSrv
 from py.core.db import DatabaseSrv
+from py.core.executor import ExecutorSrv
 from py.core.redis import RedisSrv
 from py.drivers.service import DriverSrv
 
@@ -39,6 +40,8 @@ def register_services():
     MainHub.register(DatabaseSrv(settings['SQL_ENGINE']), DatabaseSrv)
     logger.info('Database service registered')
     MainHub.register(BinderSrv(MainHub.retrieve(RedisSrv)), BinderSrv)
+
+    MainHub.register(ExecutorSrv(), ExecutorSrv)
 
     # Exit if not connected
     if MainHub.retrieve(DatabaseSrv).connection is None:

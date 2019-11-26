@@ -32,6 +32,9 @@ from py.models.device import Device, DeviceParameterBinding
 from py.models.room import RoomMdl, DeviceRoomBinding
 from py.models.scenario import Scenario
 from py.models.trigger import TriggerMdl, TriggerParamMdl
+from py.models.setpoint import SetPointMdl
+from py.models.condition import ConditionMdl, ConditionTypeEnum
+from py.models.instruction import InstructionMdl
 target_metadata = ModelBase.get_base().metadata
 
 

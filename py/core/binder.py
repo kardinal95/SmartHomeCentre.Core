@@ -2,6 +2,7 @@ from loguru import logger
 
 from py.core import MainHub
 from py.core.db import DatabaseSrv
+from py.core.executor import ExecutorSrv
 from py.models.device import DeviceParameterBinding
 from py.models.scenario import Scenario
 from py.models.trigger import TriggerParamMdl, TriggerMdl
@@ -18,6 +19,7 @@ class BinderSrv:
         # TODO Do something with scenarios
         # TODO Pass to interface
         logger.debug('Scenarios found. {}'.format(scenarios))
+        MainHub.retrieve(ExecutorSrv).execute_multi(scenarios)
 
     def get_device_parameter(self, uuid, key):
         session = MainHub.retrieve(DatabaseSrv).session()

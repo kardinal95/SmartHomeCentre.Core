@@ -1,10 +1,15 @@
-from sqlalchemy import Column, String
+from sqlalchemy import Column, Integer, ForeignKey, String
 from sqlalchemy.dialects.postgresql import UUID
 
-from py.models import ModelBase
+from py.models import DatabaseModel
 
 
-#class InstructionType(ModelBase.get_base()):
-#    __tablename__ = 'instruction_types'
-#    uuid = Column(UUID(as_uuid=True), unique=True, nullable=False, primary_key=True)
-#    name = Column(String(64), nullable=False)
+class InstructionMdl(DatabaseModel):
+    __tablename__ = 'instructions'
+    order = Column(Integer, nullable=False)
+    scenario_uuid = Column(UUID(as_uuid=True), ForeignKey('scenarios.uuid'))
+    source_uuid = Column(UUID(as_uuid=True), ForeignKey('devices.uuid'), nullable=True)
+    source_parameter = Column(String(64), nullable=True)
+    target_uuid = Column(UUID(as_uuid=True), ForeignKey('devices.uuid'), nullable=False)
+    target_parameter = Column(String(64), nullable=False)
+    setpoint_uuid = Column(UUID(as_uuid=True), ForeignKey('setpoints.uuid'), nullable=True)

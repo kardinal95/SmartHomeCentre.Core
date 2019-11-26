@@ -16,6 +16,9 @@ class RedisSrv:
     def hgetall(self, name):
         return self.redis.hgetall(name)
 
+    def hget(self, name, key):
+        return self.redis.hget(name, key)
+
     def hset(self, name, key, value):
         res = self.redis.hset(name, key, value)
         for watcher in self.watchers:

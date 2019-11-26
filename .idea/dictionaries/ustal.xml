@@ -8,6 +8,7 @@
       <w>mqtt</w>
       <w>postgresql</w>
       <w>psql</w>
+      <w>setpoint</w>
       <w>tablename</w>
       <w>uuids</w>
     </words>
