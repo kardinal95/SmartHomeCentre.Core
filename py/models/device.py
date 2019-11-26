@@ -18,7 +18,7 @@ class DeviceParameterBinding(DatabaseModel):
     # TODO Writable state, ACL
 
 
-class Device(DatabaseModel):
+class DeviceMdl(DatabaseModel):
     __tablename__ = 'devices'
     name = Column(String(128), nullable=False)
 

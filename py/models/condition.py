@@ -7,7 +7,7 @@ from sqlalchemy.dialects.postgresql import UUID
 from py.core import MainHub
 from py.core.db import DatabaseSrv
 from py.models import DatabaseModel
-from py.models.device import DeviceParameterBinding, Device
+from py.models.device import DeviceParameterBinding, DeviceMdl
 from py.models.setpoint import SetPointMdl
 
 
@@ -37,7 +37,7 @@ class ConditionMdl(DatabaseModel):
     def is_met(self):
         if self.condition_type in self.value_types:
             session = MainHub.retrieve(DatabaseSrv).session()
-            target = session.query(Device).filter(Device.uuid == self.target_uuid).first()
+            target = session.query(DeviceMdl).filter(DeviceMdl.uuid == self.target_uuid).first()
             setpoint = session.query(SetPointMdl).filter(SetPointMdl.uuid == self.setpoint_uuid).first()
             session.close()
 

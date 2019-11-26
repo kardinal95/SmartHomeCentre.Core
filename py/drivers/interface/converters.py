@@ -5,4 +5,3 @@ mapping = {
     InterfaceEpTypeEnum.display: None,
     InterfaceEpTypeEnum.rgb: None
 }
-

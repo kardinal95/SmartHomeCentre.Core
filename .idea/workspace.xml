@@ -2,18 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e6e13f00-c602-4ab3-b8f6-b02557b89de0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/alembic/versions/08418cb3e08b_added_instructions.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/alembic/versions/12d1737b49e9_added_conditions_and_setpoints.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/py/core/executor.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/py/models/condition.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/py/models/setpoint.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alembic/versions/3c4e31434950_fixed_device_room_binding.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dictionaries/ustal.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/ustal.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/alembic/env.py" beforeDir="false" afterPath="$PROJECT_DIR$/alembic/env.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/py/core/binder.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/core/binder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/core/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/core/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/core/binder.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/core/trigger.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/core/executor.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/core/executor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/py/core/redis.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/core/redis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/drivers/interface/converters.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/drivers/interface/converters.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/drivers/mqtt/driver.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/drivers/mqtt/driver.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/models/condition.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/models/condition.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/py/models/device.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/models/device.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/py/models/instruction.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/models/instruction.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/models/room.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/models/room.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/models/scenario.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/models/scenario.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/run.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -114,16 +116,5 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/LunchBoxServer" />
     </ignored-roots>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/py/drivers/mqtt/driver.py</url>
-          <line>98</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

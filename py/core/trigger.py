@@ -4,24 +4,23 @@ from py.core import MainHub
 from py.core.db import DatabaseSrv
 from py.core.executor import ExecutorSrv
 from py.models.device import DeviceParameterBinding
-from py.models.scenario import Scenario
+from py.models.scenario import ScenarioMdl
 from py.models.trigger import TriggerParamMdl, TriggerMdl
 
 
-class BinderSrv:
+class TriggerService:
     def __init__(self, redis):
         redis.add_watcher(self)
-        logger.info('Binder service started')
 
     def invoke(self, **kwargs):
-        device_parameters = self.get_device_parameter(kwargs['name'], kwargs['key'])
+        device_parameters = self.get_device_parameter_pairs(kwargs['name'], kwargs['key'])
         scenarios = self.get_scenarios(device_parameters)
-        # TODO Do something with scenarios
         # TODO Pass to interface
-        logger.debug('Scenarios found. {}'.format(scenarios))
+        logger.debug('Found {} scenarios.'.format(len(scenarios)))
         MainHub.retrieve(ExecutorSrv).execute_multi(scenarios)
 
-    def get_device_parameter(self, uuid, key):
+    @staticmethod
+    def get_device_parameter_pairs(uuid, key):
         session = MainHub.retrieve(DatabaseSrv).session()
         bindings = session.query(DeviceParameterBinding)\
             .filter(DeviceParameterBinding.endpoint_uuid == uuid)\
@@ -31,7 +30,8 @@ class BinderSrv:
 
         return [(x.device_uuid, x.device_parameter) for x in bindings]
 
-    def get_scenarios(self, items):
+    @staticmethod
+    def get_scenarios(items):
         scenario_uuids = []
         session = MainHub.retrieve(DatabaseSrv).session()
 
@@ -50,7 +50,7 @@ class BinderSrv:
             triggers = session.query(TriggerMdl).filter(TriggerMdl.uuid.in_(trigger_uuids)).all()
             scenario_uuids += [x.scenario_uuid for x in triggers]
 
-        scenarios = session.query(Scenario).filter(Scenario.uuid.in_(scenario_uuids)).all()
+        scenarios = session.query(ScenarioMdl).filter(ScenarioMdl.uuid.in_(scenario_uuids)).all()
         session.close()
 
         return scenarios

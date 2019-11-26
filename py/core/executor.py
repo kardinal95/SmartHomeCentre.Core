@@ -6,21 +6,19 @@ from loguru import logger
 from py.core import MainHub
 from py.core.db import DatabaseSrv
 from py.models.condition import ConditionMdl
-from py.models.device import Device
+from py.models.device import DeviceMdl
 from py.models.instruction import InstructionMdl
-from py.models.scenario import Scenario
+from py.models.scenario import ScenarioMdl
 from py.models.setpoint import SetPointMdl
 
 
 class ExecutorSrv:
-    def __init__(self):
-        logger.info('Executor service started')
-
-    def execute_multi(self, scenarios: List[Scenario]):
+    def execute_multi(self, scenarios: List[ScenarioMdl]):
         for item in scenarios:
             self.execute(item)
 
-    def execute(self, scenario: Scenario):
+    def execute(self, scenario: ScenarioMdl):
+        # TODO Spawn subprocess?
         session = MainHub.retrieve(DatabaseSrv).session()
         conditions = session.query(ConditionMdl).filter(ConditionMdl.scenario_uuid == scenario.uuid).all()
         session.close()
@@ -29,7 +27,7 @@ class ExecutorSrv:
             if not condition.is_met():
                 return
 
-        logger.info('Executing scenario {}'.format(scenario.title))
+        logger.info('Executing scenario "{}"'.format(scenario.title))
         session = MainHub.retrieve(DatabaseSrv).session()
         instructions = session.query(InstructionMdl)\
             .filter(InstructionMdl.scenario_uuid == scenario.uuid)\
@@ -38,14 +36,15 @@ class ExecutorSrv:
         session.close()
 
         for instruction in instructions:
-            self.execute_instructions(instruction)
+            self.execute_instruction(instruction)
 
-    def execute_instructions(self, instruction: InstructionMdl):
+    @staticmethod
+    def execute_instruction(instruction: InstructionMdl):
         session = MainHub.retrieve(DatabaseSrv).session()
-        target = session.query(Device).filter(Device.uuid == instruction.target_uuid).first()
+        target = session.query(DeviceMdl).filter(DeviceMdl.uuid == instruction.target_uuid).first()
 
         if instruction.setpoint_uuid is None:
-            source = session.query(Device).filter(Device.uuid == instruction.source_uuid).first()
+            source = session.query(DeviceMdl).filter(DeviceMdl.uuid == instruction.source_uuid).first()
             value = source.get_value_for_parameter(instruction.source_parameter)
         else:
             setpoint = session.query(SetPointMdl).filter(SetPointMdl.uuid == instruction.setpoint_uuid).first()

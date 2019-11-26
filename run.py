@@ -1,11 +1,10 @@
 import sys
-from uuid import UUID
 
-from dynaconf import settings, Validator, ValidationError
+from dynaconf import *
 from loguru import logger
 
 from py.core import MainHub
-from py.core.binder import BinderSrv
+from py.core.trigger import TriggerService
 from py.core.db import DatabaseSrv
 from py.core.executor import ExecutorSrv
 from py.core.redis import RedisSrv
@@ -20,7 +19,6 @@ def settings_validation():
 
 
 def configure():
-    # Configuration of logger
     logger.remove()
     if settings.ENV_FOR_DYNACONF == 'production':
         logger.add('core.log', level='INFO', rotation='10 MB', backtrace=False, diagnose=False)
@@ -36,11 +34,8 @@ def register_services():
     # TODO Move logging to services
     # Service loading
     MainHub.register(RedisSrv(), RedisSrv)
-    logger.info('Redis service registered')
     MainHub.register(DatabaseSrv(settings['SQL_ENGINE']), DatabaseSrv)
-    logger.info('Database service registered')
-    MainHub.register(BinderSrv(MainHub.retrieve(RedisSrv)), BinderSrv)
-
+    MainHub.register(TriggerService(MainHub.retrieve(RedisSrv)), TriggerService)
     MainHub.register(ExecutorSrv(), ExecutorSrv)
 
     # Exit if not connected
@@ -59,7 +54,5 @@ if __name__ == '__main__':
         logger.exception(e)
 
     MainHub.register(DriverSrv(), DriverSrv)
-
-    #MainHub.retrieve(DriverSrv).instances[UUID('63edb3aa-7e13-4900-8d46-3e39cd9047d0')].process_data_to_ep(UUID('e57e5c77-7797-41e9-a633-bde686ed51de'), {'red': 255})
     while True:
         pass

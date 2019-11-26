@@ -2,6 +2,7 @@
   <dictionary name="ustal">
     <words>
       <w>deregister</w>
+      <w>deregistered</w>
       <w>formatters</w>
       <w>hgetall</w>
       <w>hset</w>
@@ -9,6 +10,7 @@
       <w>postgresql</w>
       <w>psql</w>
       <w>setpoint</w>
+      <w>setpoints</w>
       <w>tablename</w>
       <w>uuids</w>
     </words>

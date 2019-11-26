@@ -28,9 +28,9 @@ from py.models.endpoint import EndpointMdl
 from py.models.driver_instance import DriverInstanceMdl, DriverParameterMdl
 from py.drivers.mqtt.models import MqttParamsMdl, MqttEpTypeMdl
 from py.drivers.interface.models import InterfaceParamsMdl, InterfaceBindingMdl
-from py.models.device import Device, DeviceParameterBinding
+from py.models.device import DeviceMdl, DeviceParameterBinding
 from py.models.room import RoomMdl, DeviceRoomBinding
-from py.models.scenario import Scenario
+from py.models.scenario import ScenarioMdl
 from py.models.trigger import TriggerMdl, TriggerParamMdl
 from py.models.setpoint import SetPointMdl
 from py.models.condition import ConditionMdl, ConditionTypeEnum

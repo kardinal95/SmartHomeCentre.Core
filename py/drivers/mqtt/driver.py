@@ -94,7 +94,6 @@ class MqttDriver(BaseDriver):
 
         t = Template(mqtt_type.write_template)
         msg = t.substitute(current)
-        logger.debug(msg)
 
         self.publish(param.topic_write, msg)
 
