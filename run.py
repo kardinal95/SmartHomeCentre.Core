@@ -1,10 +1,14 @@
 import sys
+from uuid import UUID
 
 from dynaconf import settings, Validator, ValidationError
 from loguru import logger
 
-from py.drivers.master import DriverMaster
-from py.main.db import init_db, DatabaseObjects
+from py.core import MainHub
+from py.core.binder import BinderSrv
+from py.core.db import DatabaseSrv
+from py.core.redis import RedisSrv
+from py.drivers.service import DriverSrv
 
 
 def settings_validation():
@@ -14,11 +18,11 @@ def settings_validation():
     settings.validators.validate()
 
 
-def initialize():
+def configure():
     # Configuration of logger
     logger.remove()
     if settings.ENV_FOR_DYNACONF == 'production':
-        logger.add('main.log', level='INFO', rotation='10 MB', backtrace=False, diagnose=False)
+        logger.add('core.log', level='INFO', rotation='10 MB', backtrace=False, diagnose=False)
         logger.add(sys.stdout, level='INFO', colorize=True, backtrace=False, diagnose=False)
     if settings.ENV_FOR_DYNACONF == 'development':
         logger.add(sys.stdout, colorize=True, backtrace=True, diagnose=True)
@@ -27,21 +31,32 @@ def initialize():
     logger.debug('Running the program in {mode} environment...', mode=settings.ENV_FOR_DYNACONF)
 
 
+def register_services():
+    # TODO Move logging to services
+    # Service loading
+    MainHub.register(RedisSrv(), RedisSrv)
+    logger.info('Redis service registered')
+    MainHub.register(DatabaseSrv(settings['SQL_ENGINE']), DatabaseSrv)
+    logger.info('Database service registered')
+    MainHub.register(BinderSrv(MainHub.retrieve(RedisSrv)), BinderSrv)
+
+    # Exit if not connected
+    if MainHub.retrieve(DatabaseSrv).connection is None:
+        logger.critical('Cannot work without connection to database! Closing...')
+
+
 if __name__ == '__main__':
-    initialize()
+    configure()
     try:
         settings_validation()
-        init_db()
+        register_services()
     except ValidationError as e:
         logger.exception(e)
     except KeyError as e:
         logger.exception(e)
 
-    # Exit if not connected
-    if DatabaseObjects.connection is None:
-        logger.critical('Cannot work without connection to database! Closing...')
+    MainHub.register(DriverSrv(), DriverSrv)
 
-    master = DriverMaster()
-
+    #MainHub.retrieve(DriverSrv).instances[UUID('63edb3aa-7e13-4900-8d46-3e39cd9047d0')].process_data_to_ep(UUID('e57e5c77-7797-41e9-a633-bde686ed51de'), {'red': 255})
     while True:
         pass

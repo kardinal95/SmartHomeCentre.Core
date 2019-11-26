@@ -1,11 +1,15 @@
 <component name="ProjectDictionaryState">
   <dictionary name="ustal">
     <words>
+      <w>deregister</w>
       <w>formatters</w>
+      <w>hgetall</w>
+      <w>hset</w>
       <w>mqtt</w>
       <w>postgresql</w>
       <w>psql</w>
       <w>tablename</w>
+      <w>uuids</w>
     </words>
   </dictionary>
 </component>

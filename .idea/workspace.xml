@@ -1,7 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e6e13f00-c602-4ab3-b8f6-b02557b89de0" name="Default Changelist" comment="" />
+    <list default="true" id="e6e13f00-c602-4ab3-b8f6-b02557b89de0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/alembic/versions/0be4d9a4469a_add_rooms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alembic/versions/531f36e731cf_starting_point.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alembic/versions/b2aec60d1af7_fix_triggers_a_bit.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alembic/versions/b3485667d74e_triggers_and_scenario_base.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alembic/versions/dd0acf882385_trigger_param_fix.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alembic/versions/ee36b03b1adf_restored_missing_trigger_type.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/py/core/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/py/core/redis.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/py/drivers/base.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/py/drivers/interface/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/py/drivers/interface/converters.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/py/drivers/interface/driver.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/py/drivers/interface/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/py/drivers/mqtt/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/py/models/device.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/py/models/room.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/ustal.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/ustal.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pipfile" beforeDir="false" afterPath="$PROJECT_DIR$/Pipfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pipfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Pipfile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alembic/env.py" beforeDir="false" afterPath="$PROJECT_DIR$/alembic/env.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alembic/versions/0abf2310d649_reformat_instructions.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/alembic/versions/1af8addfa34e_make_endpoints.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/alembic/versions/226c10124b82_adding_parameters_for_driver_instances.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/alembic/versions/5e2f64b9d13a_endpoints_constraints.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/alembic/versions/68efe5590fda_fix_driver_incorrect_instancing.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/alembic/versions/7393ed925819_basic_scenarios.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/alembic/versions/863938515119_initial_migration.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/alembic/versions/f0f0a3c02af8_add_mqtt_endpoint_info.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/alembic/versions/f7a0ccb9057c_add_triggers.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/settings.toml" beforeDir="false" afterPath="$PROJECT_DIR$/config/settings.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/drivers/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/drivers/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/drivers/master.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/drivers/service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/drivers/mqtt/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/drivers/mqtt/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/drivers/mqtt/driver.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/drivers/mqtt/driver.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/drivers/mqtt/endpoint.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/drivers/mqtt/store.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/main/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/core/binder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/main/db.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/core/db.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/main/executor.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/models/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/models/driver_instance.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/models/driver_instance.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/models/endpoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/models/endpoint.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/models/instruction.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/models/instruction.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/models/scenario.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/models/scenario.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/models/trigger.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/models/trigger.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/run.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,11 +68,14 @@
     <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="ProjectId" id="1QGwjiCcRdfsPjfqyGN9Jvi6bu9" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="last_opened_file_path" value="C:/Program Files/Git/bin/git.exe" />
     <property name="run.code.analysis.last.selected.profile" value="aDefault" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -84,10 +135,26 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/LunchBoxServer" />
+    </ignored-roots>
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="test = session.query(TriggerParamMdl).filter(TriggerParamMdl.parameter_name == 'parameter').filter(TriggerParamMdl.parameter_value == item[1]).all()" language="Python" />
+        <watch expression="test[0].trigger_uuid in uuids" language="Python" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

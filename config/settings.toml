@@ -1,5 +1,9 @@
 [default]
 empty=0
+redis_host='127.0.0.1'
+redis_port=6379
+redis_db_id=0
+
 
 [development]
 empty=1

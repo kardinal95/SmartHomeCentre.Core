@@ -2,21 +2,15 @@ import os
 import sys
 from logging.config import fileConfig
 
-from alembic import context
 from dynaconf import settings
-from sqlalchemy import create_engine
+from sqlalchemy import engine_from_config, create_engine
+from sqlalchemy import pool
+
+from alembic import context
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
-
-
-# return the current db url
-def get_url():
-    return 'postgresql+psycopg2://{user}:{password}@{hostname}/{dbname}'.format(
-        user=settings.PSQL_USER, password=settings.PSQL_PASS,
-        hostname=settings.SQL_HOST, dbname=settings.SQL_DBNAME)
-
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
@@ -29,14 +23,15 @@ fileConfig(config.config_file_name)
 # Some workarounds. Replace later?
 sys.path.insert(0, os.path.realpath(os.path.join(os.path.dirname(__file__), '..')))
 
-# Here be imports for alembic model system
 from py.models import ModelBase
-from py.drivers.mqtt.endpoint import MqttEndpoint, MqttParameterPattern
-from py.models.driver_instance import DriverInstance
-from py.models.trigger import Trigger
-from py.models.scenario import ScenarioInstruction, Scenario
-from py.models.instruction import InstructionType
-
+from py.models.endpoint import EndpointMdl
+from py.models.driver_instance import DriverInstanceMdl, DriverParameterMdl
+from py.drivers.mqtt.models import MqttParamsMdl, MqttEpTypeMdl
+from py.drivers.interface.models import InterfaceParamsMdl, InterfaceBindingMdl
+from py.models.device import Device, DeviceParameterBinding
+from py.models.room import RoomMdl, DeviceRoomBinding
+from py.models.scenario import Scenario
+from py.models.trigger import TriggerMdl, TriggerParamMdl
 target_metadata = ModelBase.get_base().metadata
 
 
@@ -44,6 +39,12 @@ target_metadata = ModelBase.get_base().metadata
 # can be acquired:
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
+
+# return the current db url
+def get_url():
+    return 'postgresql+psycopg2://{user}:{password}@{hostname}/{dbname}'.format(
+        user=settings.PSQL_USER, password=settings.PSQL_PASS,
+        hostname=settings.SQL_HOST, dbname=settings.SQL_DBNAME)
 
 
 def run_migrations_offline():
