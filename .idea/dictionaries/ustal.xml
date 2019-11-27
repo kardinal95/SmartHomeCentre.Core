@@ -6,6 +6,7 @@
       <w>formatters</w>
       <w>hgetall</w>
       <w>hset</w>
+      <w>iface</w>
       <w>mqtt</w>
       <w>postgresql</w>
       <w>psql</w>

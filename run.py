@@ -4,6 +4,8 @@ from dynaconf import *
 from loguru import logger
 
 from py.core import MainHub
+from py.core.notifications import NotificationSrv, NotificationSeverityEnum
+from py.core.notifications.log_target import LoggingNotificationTarget
 from py.core.trigger import TriggerService
 from py.core.db import DatabaseSrv
 from py.core.executor import ExecutorSrv
@@ -37,6 +39,9 @@ def register_services():
     MainHub.register(DatabaseSrv(settings['SQL_ENGINE']), DatabaseSrv)
     MainHub.register(TriggerService(MainHub.retrieve(RedisSrv)), TriggerService)
     MainHub.register(ExecutorSrv(), ExecutorSrv)
+
+    MainHub.register(NotificationSrv(), NotificationSrv)
+    MainHub.retrieve(NotificationSrv).add_target(LoggingNotificationTarget(NotificationSeverityEnum.WARNING, prefix='ALARM'))
 
     # Exit if not connected
     if MainHub.retrieve(DatabaseSrv).connection is None:
