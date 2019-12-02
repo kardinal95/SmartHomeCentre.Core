@@ -2,21 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e6e13f00-c602-4ab3-b8f6-b02557b89de0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/alembic/versions/5fea82ea2541_added_alarm_system.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/alembic/versions/ea8722305913_fix_driver_types.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/py/core/notifications/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/py/core/notifications/email_target.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/py/core/notifications/log_target.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/py/drivers/alarm/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/py/drivers/alarm/driver.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/py/drivers/alarm/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/ustal.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/ustal.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alembic/env.py" beforeDir="false" afterPath="$PROJECT_DIR$/alembic/env.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/py/drivers/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/drivers/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/py/drivers/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/drivers/base.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/py/drivers/interface/driver.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/drivers/interface/driver.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/run.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/drivers/mqtt/driver.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/drivers/mqtt/driver.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -134,6 +121,11 @@
           <url>file://$PROJECT_DIR$/py/core/notifications/log_target.py</url>
           <line>19</line>
           <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/py/drivers/mqtt/driver.py</url>
+          <line>36</line>
+          <option name="timeStamp" value="9" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -23,34 +23,30 @@ class MqttDriver(BaseDriver):
         pass
 
     def add_ep(self, endpoint, parameters):
-        # TODO Make this load_ep and switch add to actually new eps
-        required = None
-        for param in parameters:
-            if param.ep_uuid == endpoint.uuid:
-                required = param
-                break
+        pass
 
-        logger.debug('Subscribing on MQTT device with name {}'.format(endpoint.name))
-        self.client.subscribe(required.topic_read)
-
-    def __init__(self, uuid, host, port, timeout=60):
+    def on_connect(self, client, userdata, flags, rc):
         from py.models.endpoint import EndpointMdl
-        self.uuid = uuid
-        # TODO Check if parameters exists
-        self.client = mqtt.Client()
-        self.client.on_message = self.on_message
-
-        # TODO Connection errors
-        logger.info('Connecting to mqtt server on {}:{}', host, port)
-        self.client.connect(host, port, timeout)
-        logger.info('Connected!')
+        logger.info('Connected with result code {}'.format(str(rc)))
 
         session = MainHub.retrieve(DatabaseSrv).session()
         mqtt_eps = session.query(EndpointMdl).filter(EndpointMdl.driver_type == MqttDriver.enum_type).all()
         parameters = session.query(MqttParamsMdl).all()
-        for item in mqtt_eps:
-            self.add_ep(item, parameters)
+        for item in zip(mqtt_eps, parameters):
+            logger.debug('Subscribing on MQTT device with name {}'.format(item[0].name))
+            self.client.subscribe(item[1].topic_read)
         session.close()
+
+    def __init__(self, uuid, host, port, timeout=60):
+        self.uuid = uuid
+        # TODO Check if parameters exists
+        self.client = mqtt.Client()
+        self.client.on_message = self.on_message
+        self.client.on_connect = self.on_connect
+
+        # TODO Connection errors
+        logger.info('Connecting to mqtt server on {}:{}', host, port)
+        self.client.connect(host, port, timeout)
 
         self.client.loop_start()
 
