@@ -3,6 +3,7 @@ import sys
 from dynaconf import *
 from loguru import logger
 
+from py.api import FlaskSrv
 from py.core import MainHub
 from py.core.notifications import NotificationSrv, NotificationSeverityEnum
 from py.core.notifications.log_target import LoggingNotificationTarget
@@ -43,6 +44,8 @@ def register_services():
     MainHub.register(NotificationSrv(), NotificationSrv)
     MainHub.retrieve(NotificationSrv).add_target(LoggingNotificationTarget(NotificationSeverityEnum.WARNING, prefix='ALARM'))
 
+    MainHub.register(FlaskSrv(), FlaskSrv)
+
     # Exit if not connected
     if MainHub.retrieve(DatabaseSrv).connection is None:
         logger.critical('Cannot work without connection to database! Closing...')
@@ -59,5 +62,4 @@ if __name__ == '__main__':
         logger.exception(e)
 
     MainHub.register(DriverSrv(), DriverSrv)
-    while True:
-        pass
+    MainHub.retrieve(FlaskSrv).run()

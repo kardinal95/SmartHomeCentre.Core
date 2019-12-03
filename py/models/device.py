@@ -28,11 +28,23 @@ class DeviceMdl(DatabaseModel):
             .filter(DeviceParameterBinding.device_uuid == self.uuid)\
             .filter(DeviceParameterBinding.device_parameter == name)\
             .first()
-        value = MainHub.retrieve(RedisSrv).hget(str(binding.endpoint_uuid), binding.endpoint_parameter)
         session.close()
+        value = MainHub.retrieve(RedisSrv).hget(str(binding.endpoint_uuid), binding.endpoint_parameter)
         # TODO Exception on non-existent parameters
 
         return value
+
+    def get_values_for_parameters(self, names):
+        session = MainHub.retrieve(DatabaseSrv).session()
+        bindings = session.query(DeviceParameterBinding) \
+            .filter(DeviceParameterBinding.device_uuid == self.uuid) \
+            .filter(DeviceParameterBinding.device_parameter.in_(names)) \
+            .all()
+        session.close()
+        rsrv = MainHub.retrieve(RedisSrv)
+        values = {x.device_parameter: rsrv.hget(str(x.endpoint_uuid), x.endpoint_parameter) for x in bindings}
+
+        return values
 
     def set_value_for_parameter(self, parameter, value):
         session = MainHub.retrieve(DatabaseSrv).session()

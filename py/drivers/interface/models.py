@@ -7,8 +7,8 @@ from py.models import DatabaseModel
 
 
 class InterfaceEpTypeEnum(enum.Enum):
-    switch = enum.auto(),
-    rgb = enum.auto(),
+    switch = enum.auto()
+    rgb = enum.auto()
     display = enum.auto()
 
 
