@@ -1,5 +1,6 @@
 import uuid
 
+from flask_jwt_extended import jwt_required
 from flask_restful import Resource, abort
 
 from py.api.client.models.device import DeviceDTO, DeviceExtendedDTO
@@ -9,6 +10,7 @@ from py.api.client.operations.rooms import *
 
 
 class Rooms(Resource):
+    @jwt_required
     def get(self):
         rooms = get_all_rooms()
 
@@ -18,6 +20,7 @@ class Rooms(Resource):
 
 
 class RoomDevices(Resource):
+    @jwt_required
     def get(self, room_uuid):
         devices = None
         try:
@@ -31,25 +34,7 @@ class RoomDevices(Resource):
 
 
 class RoomDevicesExtended(Resource):
-    def get(self, room_uuid):
-        data = None
-        try:
-            data = get_room_devices_extended(uuid.UUID(room_uuid))
-        except ValueError:
-            abort(400, message='Badly formatted UUID')
-
-        if data is None:
-            abort(404, message='Room with uuid {} does not exist'.format(room_uuid))
-
-        devices = list()
-        for device, endpoints in data:
-            device_dto = DeviceExtendedDTO(device)
-            device_dto.add_endpoints([EndpointDTO(x[0], x[1], x[2], False, x[3]) for x in endpoints])
-            devices.append(device_dto)
-        return [x.as_json() for x in devices]
-
-
-class RoomDevicesExtended(Resource):
+    @jwt_required
     def get(self, room_uuid):
         data = None
         try:

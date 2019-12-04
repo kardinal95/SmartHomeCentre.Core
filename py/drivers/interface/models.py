@@ -1,6 +1,6 @@
 import enum
 
-from sqlalchemy import Column, ForeignKey, Enum, String
+from sqlalchemy import Column, ForeignKey, Enum, String, Integer
 from sqlalchemy.dialects.postgresql import UUID
 
 from py.models import DatabaseModel
@@ -16,6 +16,8 @@ class InterfaceParamsMdl(DatabaseModel):
     __tablename__ = 'interface_params'
     ep_uuid = Column(UUID(as_uuid=True), ForeignKey('endpoints.uuid'))
     type = Column(Enum(InterfaceEpTypeEnum))
+    write_acl = Column(Integer, server_default='999')
+    read_acl = Column(Integer, server_default='1')
     # TODO Read/Write ACL?
 
 

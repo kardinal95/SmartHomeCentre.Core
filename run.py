@@ -12,6 +12,7 @@ from py.core.db import DatabaseSrv
 from py.core.executor import ExecutorSrv
 from py.core.redis import RedisSrv
 from py.drivers.service import DriverSrv
+from py.models.user import UserMdl
 
 
 def settings_validation():

@@ -36,6 +36,7 @@ from py.models.trigger import TriggerMdl, TriggerParamMdl
 from py.models.setpoint import SetPointMdl
 from py.models.condition import ConditionMdl, ConditionTypeEnum
 from py.models.instruction import InstructionMdl
+from py.models.user import UserMdl
 target_metadata = ModelBase.get_base().metadata
 
 

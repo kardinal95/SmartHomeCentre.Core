@@ -1,5 +1,6 @@
 import uuid
 
+from flask_jwt_extended import jwt_required
 from flask_restful import Resource, abort
 
 from py.api.client.models.device import *
@@ -7,6 +8,7 @@ from py.api.client.operations.devices import *
 
 
 class Devices(Resource):
+    @jwt_required
     def get(self):
         devices = get_devices()
 
@@ -16,6 +18,7 @@ class Devices(Resource):
 
 
 class Device(Resource):
+    @jwt_required
     def get(self, device_uuid):
         device = None
         try:
@@ -29,6 +32,7 @@ class Device(Resource):
 
 
 class DeviceExtended(Resource):
+    @jwt_required
     def get(self, device_uuid):
         device = None
         endpoints = None
@@ -41,11 +45,12 @@ class DeviceExtended(Resource):
             abort(404, message='Device with uuid {} does not exist'.format(device_uuid))
 
         device_dto = DeviceExtendedDTO(device)
-        device_dto.add_endpoints([EndpointDTO(x[0], x[1], x[2], False, x[3]) for x in endpoints])
+        device_dto.add_endpoints([EndpointDTO(x[0], x[1], x[2], x[3], x[4]) for x in endpoints])
         return device_dto.as_json()
 
 
 class DeviceEndpoints(Resource):
+    @jwt_required
     def get(self, device_uuid):
         endpoints = None
         try:
@@ -56,10 +61,11 @@ class DeviceEndpoints(Resource):
         if endpoints is None:
             abort(404, message='Device with uuid {} does not exist'.format(device_uuid))
 
-        return [EndpointDTO(x[0], x[1], x[2], False, x[3]).as_json() for x in endpoints]
+        return [EndpointDTO(x[0], x[1], x[2], x[3], x[4]).as_json() for x in endpoints]
 
 
 class DeviceEndpoint(Resource):
+    @jwt_required
     def get(self, device_uuid, endpoint_uuid):
         endpoint = None
         try:
@@ -70,13 +76,24 @@ class DeviceEndpoint(Resource):
         if endpoint is None:
             abort(404, message='Device with uuid {} does not exist'.format(device_uuid))
 
-        return EndpointDTO(endpoint[0], endpoint[1], endpoint[2], False, endpoint[3]).as_json()
+        return EndpointDTO(endpoint[0], endpoint[1], endpoint[2], endpoint[3], endpoint[4]).as_json()
 
 
 class DeviceEndpointState(Resource):
-    def patch(self):
-        pass
+    @jwt_required
+    def patch(self, device_uuid, endpoint_uuid):
+        endpoint = None
+        try:
+            endpoint = get_device_endpoint(uuid.UUID(device_uuid), uuid.UUID(endpoint_uuid))
+        except ValueError:
+            abort(400, message='Badly formatted UUID')
 
+        if endpoint[3] is False:
+            abort(400, message='Not allowed')
+
+        #change_devive_state(args)
+
+    @jwt_required
     def get(self, device_uuid, endpoint_uuid):
         endpoint = None
         try:
@@ -87,4 +104,4 @@ class DeviceEndpointState(Resource):
         if endpoint is None:
             abort(404, message='Device with uuid {} does not exist'.format(device_uuid))
 
-        return endpoint[3]
+        return endpoint[4]
