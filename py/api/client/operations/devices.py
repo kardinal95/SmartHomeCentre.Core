@@ -13,8 +13,6 @@ from py.models.endpoint import EndpointMdl
 
 
 def get_room_devices(room_uuid):
-    # TODO Filter ACL?
-
     room = get_room(room_uuid)
     if room is None:
         return None

@@ -3,6 +3,7 @@ import uuid
 from flask_jwt_extended import jwt_required
 from flask_restful import Resource, abort
 
+from py.api import EndpointDTO
 from py.api.client.models.device import DeviceDTO, DeviceExtendedDTO
 from py.api.client.models.room import RoomDTO
 from py.api.client.operations.devices import *
@@ -48,6 +49,6 @@ class RoomDevicesExtended(Resource):
         devices = list()
         for device, endpoints in data:
             device_dto = DeviceExtendedDTO(device)
-            device_dto.add_endpoints([EndpointDTO(x[0], x[1], x[2], False, x[3]) for x in endpoints])
+            device_dto.add_endpoints([EndpointDTO(x[0], x[1], x[2], x[3], x[4]) for x in endpoints])
             devices.append(device_dto)
         return [x.as_json() for x in devices]

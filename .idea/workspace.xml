@@ -2,23 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e6e13f00-c602-4ab3-b8f6-b02557b89de0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/alembic/versions/2ff8a3418909_added_revoked_tokens.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/alembic/versions/cd685b058c8e_added_users_and_acl.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/py/api/client/operations/users.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/py/api/client/resources/users.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/py/models/user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/ustal.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/ustal.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.secrets.toml" beforeDir="false" afterPath="$PROJECT_DIR$/.secrets.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pipfile" beforeDir="false" afterPath="$PROJECT_DIR$/Pipfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pipfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Pipfile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alembic/env.py" beforeDir="false" afterPath="$PROJECT_DIR$/alembic/env.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/py/api/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/api/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/py/api/client/operations/devices.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/api/client/operations/devices.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/py/api/client/resources/devices.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/api/client/resources/devices.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/py/api/client/resources/rooms.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/api/client/resources/rooms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/py/drivers/interface/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/drivers/interface/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/run.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,22 +120,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="640" y="247" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1575358453845" />
-    <state width="1899" height="368" key="GridCell.Tab.0.bottom" timestamp="1575463844879">
+    <state width="1899" height="368" key="GridCell.Tab.0.bottom" timestamp="1575464708245">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="368" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1575463844879" />
-    <state width="1899" height="368" key="GridCell.Tab.0.center" timestamp="1575463844878">
+    <state width="1899" height="368" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1575464708245" />
+    <state width="1899" height="368" key="GridCell.Tab.0.center" timestamp="1575464708245">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="368" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1575463844878" />
-    <state width="1899" height="368" key="GridCell.Tab.0.left" timestamp="1575463844878">
+    <state width="1899" height="368" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1575464708245" />
+    <state width="1899" height="368" key="GridCell.Tab.0.left" timestamp="1575464708245">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="368" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1575463844878" />
-    <state width="1899" height="368" key="GridCell.Tab.0.right" timestamp="1575463844879">
+    <state width="1899" height="368" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1575464708245" />
+    <state width="1899" height="368" key="GridCell.Tab.0.right" timestamp="1575464708245">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="368" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1575463844879" />
+    <state width="1899" height="368" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1575464708245" />
     <state width="1899" height="347" key="GridCell.Tab.1.bottom" timestamp="1575460208292">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -185,7 +171,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/py/api/client/operations/devices.py</url>
-          <line>94</line>
+          <line>92</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
