@@ -1,6 +1,6 @@
 import enum
 
-from sqlalchemy import Column, ForeignKey, Enum, String
+from sqlalchemy import *
 from sqlalchemy.dialects.postgresql import UUID
 
 from py.models import DatabaseModel

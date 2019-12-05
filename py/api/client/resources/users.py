@@ -1,6 +1,7 @@
 from flask_jwt_extended import *
 from flask_restful import Resource, reqparse, abort
 
+from py.api.exceptions import abort_on_exc
 from py.api.client.operations.users import *
 
 parser = reqparse.RequestParser()
@@ -9,9 +10,11 @@ parser.add_argument('password', help='This field cannot be blank', required=True
 
 
 class UserLogin(Resource):
-    def post(self):
+    @abort_on_exc
+    @db_session
+    def post(self, session):
         data = parser.parse_args()
-        user = get_user_by_username(data['username'])
+        user = UserMdl.get_user_with_username(username=data['username'], session=session)
 
         if user is None:
             abort(404, message='Incorrect user/password')
@@ -28,6 +31,7 @@ class UserLogin(Resource):
 
 
 class TokenRefresh(Resource):
+    @abort_on_exc
     @jwt_refresh_token_required
     def post(self):
         user = get_jwt_identity()
@@ -39,13 +43,15 @@ class TokenRefresh(Resource):
 
 class UserLogoutRefresh(Resource):
     @jwt_refresh_token_required
-    def post(self):
+    @db_session
+    def post(self, session):
         jti = get_raw_jwt()['jti']
-        revoke_token(jti)
+        revoke_token(jti=jti, session=session)
 
 
 class UserLogoutAccess(Resource):
     @jwt_required
-    def post(self):
+    @db_session
+    def post(self, session):
         jti = get_raw_jwt()['jti']
-        revoke_token(jti)
+        revoke_token(jti=jti, session=session)

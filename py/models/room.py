@@ -1,8 +1,10 @@
+from typing import List
+
 from sqlalchemy import *
 from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.orm import relationship
 
-from py.core import MainHub
-from py.core.db import DatabaseSrv
+from py import db_session
 from py.models import DatabaseModel
 from py.models.device import DeviceMdl
 
@@ -11,18 +13,30 @@ class DeviceRoomBinding(DatabaseModel):
     __tablename__ = 'device_room_binds'
     device_uuid = Column(UUID(as_uuid=True), ForeignKey('devices.uuid'))
     room_uuid = Column(UUID(as_uuid=True), ForeignKey('rooms.uuid'))
+    room = relationship('RoomMdl', uselist=False)
+    device = relationship('DeviceMdl', uselist=False)
+
+    @classmethod
+    @db_session
+    def get_devices_by_room_uuid(cls, uuid, session):
+        binds = session.query(cls).filter(cls.room_uuid == uuid).all()
+        return [x.device for x in binds]
 
 
 class RoomMdl(DatabaseModel):
     __tablename__ = 'rooms'
     name = Column(String(64), nullable=False)
-    # TODO Modes/States?
 
-    def get_devices(self):
-        session = MainHub.retrieve(DatabaseSrv).session()
-        binds = session.query(DeviceRoomBinding).filter(DeviceRoomBinding.room_uuid == self.uuid).all()
-        binds_ids = [x.device_uuid for x in binds]
-        devices = session.query(DeviceMdl).filter(DeviceMdl.uuid.in_(binds_ids)).all()
-        session.close()
+    @db_session
+    def get_devices(self, session) -> List[DeviceMdl]:
+        return DeviceRoomBinding.get_devices_by_room_uuid(uuid=self.uuid, session=session)
 
-        return devices
+    @classmethod
+    @db_session
+    def get_all_rooms(cls, session):
+        return session.query(cls).all()
+
+    @classmethod
+    @db_session
+    def get_room_with_uuid(cls, uuid, session):
+        return session.query(cls).filter(cls.uuid == uuid).first()

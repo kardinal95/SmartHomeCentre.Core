@@ -3,8 +3,8 @@ from string import Template
 import paho.mqtt.client as mqtt
 from loguru import logger
 
+from py import db_session
 from py.core import MainHub
-from py.core.db import DatabaseSrv
 from py.core.redis import RedisSrv
 from py.drivers.base import BaseDriver
 
@@ -25,17 +25,16 @@ class MqttDriver(BaseDriver):
     def add_ep(self, endpoint, parameters):
         pass
 
-    def on_connect(self, client, userdata, flags, rc):
+    @db_session
+    def on_connect(self, client, userdata, flags, rc, session):
         from py.models.endpoint import EndpointMdl
         logger.info('Connected with result code {}'.format(str(rc)))
 
-        session = MainHub.retrieve(DatabaseSrv).session()
         mqtt_eps = session.query(EndpointMdl).filter(EndpointMdl.driver_type == MqttDriver.enum_type).all()
         parameters = session.query(MqttParamsMdl).all()
         for item in zip(mqtt_eps, parameters):
             logger.debug('Subscribing on MQTT device with name {}'.format(item[0].name))
             self.client.subscribe(item[1].topic_read)
-        session.close()
 
     def __init__(self, uuid, host, port, timeout=60):
         self.uuid = uuid
@@ -51,13 +50,12 @@ class MqttDriver(BaseDriver):
         self.client.loop_start()
 
     @staticmethod
-    def on_message(client, userdata, msg):
+    @db_session
+    def on_message(client, userdata, msg, session):
         logger.debug('Received message on {} with data: {}'.format(msg.topic, msg.payload))
 
-        session = MainHub.retrieve(DatabaseSrv).session()
         param = session.query(MqttParamsMdl).filter(MqttParamsMdl.topic_read == msg.topic).first()
         mqtt_type = session.query(MqttEpTypeMdl).filter(MqttEpTypeMdl.uuid == param.type_uuid).first()
-        session.close()
 
         MqttDriver.process_data_from_ep(msg.payload, param.ep_uuid, mqtt_type)
 
@@ -76,11 +74,10 @@ class MqttDriver(BaseDriver):
                 logger.info('New value for {}: {} = {}'.format(ep_uuid, pair[0], pair[1]))
                 changed.append(pair[0])
 
-    def process_data_to_ep(self, ep_uuid, parameters):
-        session = MainHub.retrieve(DatabaseSrv).session()
+    @db_session
+    def process_data_to_ep(self, ep_uuid, parameters, session):
         param = session.query(MqttParamsMdl).filter(MqttParamsMdl.ep_uuid == ep_uuid).first()
         mqtt_type = session.query(MqttEpTypeMdl).filter(MqttEpTypeMdl.uuid == param.type_uuid).first()
-        session.close()
 
         current = MainHub.retrieve(RedisSrv).hgetall(str(ep_uuid))
 

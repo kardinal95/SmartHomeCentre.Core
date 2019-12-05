@@ -2,9 +2,35 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e6e13f00-c602-4ab3-b8f6-b02557b89de0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/py/api/exceptions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/ustal.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/ustal.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/api/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/api/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/api/client/models/endpoints.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/api/client/models/endpoints.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/py/api/client/operations/devices.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/api/client/operations/devices.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/api/client/operations/rooms.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/api/client/operations/rooms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/api/client/operations/users.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/api/client/operations/users.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/api/client/resources/devices.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/api/client/resources/devices.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/py/api/client/resources/rooms.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/api/client/resources/rooms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/api/client/resources/users.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/api/client/resources/users.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/core/executor.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/core/executor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/core/trigger.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/core/trigger.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/drivers/alarm/driver.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/drivers/alarm/driver.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/drivers/alarm/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/drivers/alarm/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/drivers/interface/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/drivers/interface/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/drivers/mqtt/driver.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/drivers/mqtt/driver.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/drivers/mqtt/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/drivers/mqtt/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/drivers/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/drivers/service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/models/condition.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/models/condition.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/models/device.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/models/device.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/models/endpoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/models/endpoint.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/models/instruction.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/models/instruction.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/models/room.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/models/room.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/models/scenario.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/models/scenario.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/models/setpoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/models/setpoint.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/models/trigger.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/models/trigger.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/py/models/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/py/models/user.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,38 +146,38 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="640" y="247" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1575358453845" />
-    <state width="1899" height="368" key="GridCell.Tab.0.bottom" timestamp="1575464708245">
+    <state width="1899" height="368" key="GridCell.Tab.0.bottom" timestamp="1575534407886">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="368" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1575464708245" />
-    <state width="1899" height="368" key="GridCell.Tab.0.center" timestamp="1575464708245">
+    <state width="1899" height="368" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1575534407886" />
+    <state width="1899" height="368" key="GridCell.Tab.0.center" timestamp="1575534407886">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="368" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1575464708245" />
-    <state width="1899" height="368" key="GridCell.Tab.0.left" timestamp="1575464708245">
+    <state width="1899" height="368" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1575534407886" />
+    <state width="1899" height="368" key="GridCell.Tab.0.left" timestamp="1575534407885">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="368" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1575464708245" />
-    <state width="1899" height="368" key="GridCell.Tab.0.right" timestamp="1575464708245">
+    <state width="1899" height="368" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1575534407885" />
+    <state width="1899" height="368" key="GridCell.Tab.0.right" timestamp="1575534407886">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="368" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1575464708245" />
-    <state width="1899" height="347" key="GridCell.Tab.1.bottom" timestamp="1575460208292">
+    <state width="1899" height="368" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1575534407886" />
+    <state width="1899" height="347" key="GridCell.Tab.1.bottom" timestamp="1575533365184">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="347" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1575460208292" />
-    <state width="1899" height="347" key="GridCell.Tab.1.center" timestamp="1575460208291">
+    <state width="1899" height="347" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1575533365184" />
+    <state width="1899" height="347" key="GridCell.Tab.1.center" timestamp="1575533365184">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="347" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1575460208291" />
-    <state width="1899" height="347" key="GridCell.Tab.1.left" timestamp="1575460208291">
+    <state width="1899" height="347" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1575533365184" />
+    <state width="1899" height="347" key="GridCell.Tab.1.left" timestamp="1575533365183">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="347" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1575460208291" />
-    <state width="1899" height="347" key="GridCell.Tab.1.right" timestamp="1575460208291">
+    <state width="1899" height="347" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1575533365183" />
+    <state width="1899" height="347" key="GridCell.Tab.1.right" timestamp="1575533365184">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="347" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1575460208291" />
+    <state width="1899" height="347" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1575533365184" />
     <state x="461" y="161" key="SettingsEditor" timestamp="1575457356234">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -162,20 +188,6 @@
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1575367133197" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/py/api/client/resources/users.py</url>
-          <line>12</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/py/api/client/operations/devices.py</url>
-          <line>92</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
         <watch expression="key.decode()" language="Python" />

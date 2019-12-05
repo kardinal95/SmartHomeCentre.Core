@@ -1,120 +1,83 @@
-from itertools import groupby
-
 from flask_jwt_extended import get_jwt_identity
 
+from py import db_session
 from py.api.client.operations.rooms import get_room
-from py.api.client.operations.users import get_user_acl
-from py.core import MainHub
-from py.core.db import DatabaseSrv
 from py.drivers.interface.converters import convert
-from py.drivers.interface.models import InterfaceBindingMdl, InterfaceParamsMdl
 from py.models.device import DeviceMdl
 from py.models.endpoint import EndpointMdl
+from py.models.room import DeviceRoomBinding
+from py.api.exceptions import IncorrectTargetException
+from py.models.user import UserMdl
 
 
-def get_room_devices(room_uuid):
-    room = get_room(room_uuid)
-    if room is None:
-        return None
-    devices = room.get_devices()
-
-    return devices
+@db_session
+def get_room_devices(uuid, session):
+    get_room(uuid=uuid, session=session)
+    return DeviceRoomBinding.get_devices_by_room_uuid(uuid=uuid, session=session)
 
 
-def get_room_devices_extended(room_uuid):
-    # TODO Filter ACL?
+@db_session
+def get_room_devices_extended(uuid, session):
+    devices = get_room_devices(uuid=uuid, session=session)
+    return {x: get_device_endpoints_full(x.uuid) for x in devices}
 
-    room = get_room(room_uuid)
-    if room is None:
-        return None
-    devices = room.get_devices()
-    result = list()
-    for item in devices:
-        result.append(get_device_extended(item.uuid))
+
+@db_session
+def get_devices(session):
+    return DeviceMdl.get_all_devices(session=session)
+
+
+@db_session
+def get_device(uuid, session):
+    device = DeviceMdl.get_device_with_uuid(uuid=uuid, session=session)
+    if device is None:
+        raise IncorrectTargetException(uuid, DeviceMdl)
+    return device
+
+
+@db_session
+def get_device_endpoints_full(uuid, session):
+    device = get_device(uuid=uuid, session=session)
+    acl = UserMdl.get_user_with_username(username=get_jwt_identity(), session=session).acl
+
+    values = device.get_all_values()
+    result = dict()
+    for item in device.iface_binds:
+        ep = item.ep
+        param = ep.iface_param
+        if param.read_acl > acl:
+            continue
+        if ep.uuid not in result.keys():
+            result[ep.uuid] = dict()
+            result[ep.uuid]['values'] = dict()
+            result[ep.uuid]['name'] = ep.name
+            result[ep.uuid]['type'] = param.type
+            result[ep.uuid]['writable'] = acl >= param.write_acl
+        result[ep.uuid]['values'][item.ep_parameter] = values[item.device_parameter]
+
+    for item in result.keys():
+        result[item]['values'] = convert(result[item]['type'], 'encode', result[item]['values'])
 
     return result
 
 
-def get_devices():
-    session = MainHub.retrieve(DatabaseSrv).session()
-    devices = session.query(DeviceMdl).all()
-    session.close()
+@db_session
+def get_device_endpoint(device_uuid, endpoint_uuid, session):
+    device = get_device(uuid=device_uuid, session=session)
+    acl = UserMdl.get_user_with_username(username=get_jwt_identity(), session=session).acl
 
-    return devices
+    endpoint = EndpointMdl.get_endpoint_by_uuid(uuid=endpoint_uuid, session=session)
+    binds = [x for x in device.iface_binds if x.ep_uuid == endpoint.uuid]
+    params = endpoint.iface_param
+    values = {x.ep_parameter: device.get_value_for_parameter(x.device_parameter) for x in binds}
 
+    if endpoint.iface_param.read_acl > acl:
+        return None
 
-def get_device(device_uuid):
-    session = MainHub.retrieve(DatabaseSrv).session()
-    device = session.query(DeviceMdl).filter(DeviceMdl.uuid == device_uuid).first()
-    session.close()
-
-    return device
-
-
-def get_device_extended(device_uuid):
-    device = get_device(device_uuid)
-    acl = get_user_acl(get_jwt_identity())
-
-    session = MainHub.retrieve(DatabaseSrv).session()
-    objs = session.query(InterfaceBindingMdl, EndpointMdl, InterfaceParamsMdl)\
-        .filter(InterfaceBindingMdl.device_uuid == device_uuid)\
-        .filter(InterfaceParamsMdl.read_acl <= acl)\
-        .join(EndpointMdl, InterfaceBindingMdl.ep_uuid == EndpointMdl.uuid)\
-        .join(InterfaceParamsMdl, InterfaceParamsMdl.ep_uuid == EndpointMdl.uuid)\
-        .all()
-    session.close()
-
-    # TODO Rework this part. Maybe shift something to functions in models?
-    endpoints = list()
-    data = list()
-    for item in objs:
-        data.append((item[1].uuid, item[1].name, item[2].type, item[2].write_acl <= acl, item[0].ep_parameter, item[0].device_parameter))
-    data = groupby(data, lambda x: [x[0], x[1], x[2], x[3]])
-    for key, group in data:
-        params_dev = list()
-        mapping = dict()
-        for item in group:
-            params_dev.append(item[5])
-            mapping[item[5]] = item[4]
-        values = device.get_values_for_parameters(params_dev)
-        params_ep = {mapping[x]: y for x, y in values.items()}
-        converted = convert(key[2], 'encode', params_ep)
-
-        endpoints.append((key[0], key[1], key[2], key[3], converted))
-
-    return device, endpoints
-
-
-def get_device_endpoint(device_uuid, endpoint_uuid):
-    device = get_device(device_uuid)
-    acl = get_user_acl(get_jwt_identity())
-
-    session = MainHub.retrieve(DatabaseSrv).session()
-    objs = session.query(InterfaceBindingMdl, EndpointMdl, InterfaceParamsMdl)\
-        .filter(InterfaceBindingMdl.device_uuid == device_uuid)\
-        .filter(EndpointMdl.uuid == endpoint_uuid)\
-        .filter(InterfaceParamsMdl.read_acl <= acl)\
-        .join(EndpointMdl, InterfaceBindingMdl.ep_uuid == EndpointMdl.uuid).\
-        join(InterfaceParamsMdl, InterfaceParamsMdl.ep_uuid == EndpointMdl.uuid)\
-        .all()
-    session.close()
-
-    # TODO Rework this part. Maybe shift something to functions in models?
-    endpoints = list()
-    data = list()
-    for item in objs:
-        data.append((item[1].uuid, item[1].name, item[2].type, item[2].write_acl <= acl, item[0].ep_parameter, item[0].device_parameter))
-    data = groupby(data, lambda x: [x[0], x[1], x[2], x[3]])
-    for key, group in data:
-        params_dev = list()
-        mapping = dict()
-        for item in group:
-            params_dev.append(item[5])
-            mapping[item[5]] = item[4]
-        values = device.get_values_for_parameters(params_dev)
-        params_ep = {mapping[x]: y for x, y in values.items()}
-        converted = convert(key[2], 'encode', params_ep)
-
-        endpoints.append((key[0], key[1], key[2], key[3], converted))
-
-    return endpoints[0]
+    return {
+        'uuid': endpoint.uuid,
+        'name': endpoint.name,
+        'type': params.type,
+        'writable': acl >= params.write_acl,
+        'values': convert(params.type, 'encode', values)
+    }

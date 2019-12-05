@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, ForeignKey, String
+from sqlalchemy import *
 from sqlalchemy.dialects.postgresql import UUID
 
 from py.models import DatabaseModel

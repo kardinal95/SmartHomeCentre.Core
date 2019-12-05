@@ -1,19 +1,16 @@
-from py.core import MainHub
-from py.core.db import DatabaseSrv
+from py import db_session
+from py.api.exceptions import IncorrectTargetException
 from py.models.room import RoomMdl
 
 
-def get_all_rooms():
-    session = MainHub.retrieve(DatabaseSrv).session()
-    rooms = session.query(RoomMdl).all()
-    session.close()
-
-    return rooms
+@db_session
+def get_all_rooms(session):
+    return RoomMdl.get_all_rooms(session=session)
 
 
-def get_room(uuid):
-    session = MainHub.retrieve(DatabaseSrv).session()
-    room = session.query(RoomMdl).filter(RoomMdl.uuid == uuid).first()
-    session.close()
-
-    return room
+@db_session
+def get_room(uuid, session):
+    room = RoomMdl.get_room_with_uuid(uuid=uuid, session=session)
+    if room is None:
+        raise IncorrectTargetException(uuid, RoomMdl)
+    return RoomMdl.get_room_with_uuid(uuid=uuid, session=session)

@@ -42,6 +42,4 @@ class FlaskSrv:
         self.api.add_resource(UserLogoutAccess, '/api/client/auth/accesslogout')
 
     def run(self):
-        # TODO Debug and other variables to settings
-
         self.app.run(debug=False)

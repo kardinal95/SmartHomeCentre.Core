@@ -2,8 +2,7 @@ from typing import List
 
 from loguru import logger
 
-from py.core import MainHub
-from py.core.db import DatabaseSrv
+from py import db_session
 from py.drivers import mapping
 from py.models.driver_instance import *
 
@@ -11,14 +10,16 @@ from py.models.driver_instance import *
 class DriverSrv:
     instances = {}
 
-    def __init__(self):
-        session = MainHub.retrieve(DatabaseSrv).session()
+    @db_session
+    def __init__(self, session):
         items = session.query(DriverInstanceMdl).all()
         parameters = session.query(DriverParameterMdl).all()
-        session.close()
 
         for item in items:
             self.add_instance(item, parameters)
+
+    def get(self, uuid):
+        return self.instances[uuid]
 
     def add_instance(self, instance: DriverInstanceMdl, params: List[DriverParameterMdl]):
         logger.info('Loading {type} driver with uuid {uuid}',

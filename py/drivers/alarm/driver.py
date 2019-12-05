@@ -1,5 +1,5 @@
+from py import db_session
 from py.core import MainHub
-from py.core.db import DatabaseSrv
 from py.core.notifications import NotificationSrv, NotificationSeverityEnum
 from py.core.redis import RedisSrv
 from py.drivers.alarm.models import AlarmParamsMdl, AlarmSeverityEnum
@@ -15,15 +15,14 @@ severity_map = {
 
 
 class AlarmDriver(BaseDriver):
-    def process_data_to_ep(self, ep_uuid, parameters):
+    @db_session
+    def process_data_to_ep(self, ep_uuid, parameters, session):
         # TODO Error processing
         # TODO Check if the same value?
         MainHub.retrieve(RedisSrv).hset(str(ep_uuid), 'alarm', parameters['alarm'])
 
         if bool(parameters['alarm']) is True:
-            session = MainHub.retrieve(DatabaseSrv).session()
             params = session.query(AlarmParamsMdl).filter(AlarmParamsMdl.ep_uuid == ep_uuid).first()
-            session.close()
 
             MainHub.retrieve(NotificationSrv).send(title=params.name,
                                                    comment=params.comment,

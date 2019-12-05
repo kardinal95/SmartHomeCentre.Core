@@ -2,7 +2,7 @@ import re
 from pydoc import locate
 
 from sqlalchemy import *
-from sqlalchemy.dialects.postgresql import UUID, JSON
+from sqlalchemy.dialects.postgresql import *
 from sqlalchemy.orm import relationship
 
 from py.models import DatabaseModel

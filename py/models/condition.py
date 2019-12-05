@@ -1,13 +1,12 @@
 import enum
 from pydoc import locate
 
-from sqlalchemy import Column, String, ForeignKey, Enum
+from sqlalchemy import *
 from sqlalchemy.dialects.postgresql import UUID
 
-from py.core import MainHub
-from py.core.db import DatabaseSrv
+from py import db_session
 from py.models import DatabaseModel
-from py.models.device import DeviceParameterBinding, DeviceMdl
+from py.models.device import DeviceMdl
 from py.models.setpoint import SetPointMdl
 
 
@@ -34,12 +33,11 @@ class ConditionMdl(DatabaseModel):
                    ConditionTypeEnum.IsMore,
                    ConditionTypeEnum.NotEqual]
 
-    def is_met(self):
+    @db_session
+    def is_met(self, session):
         if self.condition_type in self.value_types:
-            session = MainHub.retrieve(DatabaseSrv).session()
             target = session.query(DeviceMdl).filter(DeviceMdl.uuid == self.target_uuid).first()
             setpoint = session.query(SetPointMdl).filter(SetPointMdl.uuid == self.setpoint_uuid).first()
-            session.close()
 
             value = target.get_value_for_parameter(self.target_parameter_name)
             # TODO Make type fixing better

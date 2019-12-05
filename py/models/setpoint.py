@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String
+from sqlalchemy import *
 
 from py.models import DatabaseModel
 
